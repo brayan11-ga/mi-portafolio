@@ -1,7 +1,7 @@
-/* ═══════════════════════════════════════════
+/* ═════════════════════════════════════════════════
    BRAYAN GARCÍA — PORTAFOLIO PERSONAL
-   Premium Dark Theme with Purple Accents
-   ═══════════════════════════════════════════ */
+   Premium Dark Theme with Purple Accents & Starfield
+   ═════════════════════════════════════════════════ */
 
 /* ── CSS Variables ── */
 :root {
@@ -70,6 +70,18 @@ img {
 a {
     text-decoration: none;
     color: inherit;
+}
+
+/* ── Fondo Animado Canvas (Starfield / Warp Speed) ── */
+#space-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background-color: var(--bg-primary);
+    pointer-events: none;
 }
 
 /* ══════════════════════════════════════
@@ -467,7 +479,7 @@ a {
 }
 
 /* ══════════════════════════════════════
-    SECTIONS (Generic)
+   SECTIONS (Generic)
    ══════════════════════════════════════ */
 .section {
     padding: 6rem 2rem;
@@ -493,9 +505,10 @@ a {
     z-index: 1;
 }
 
+/* CORRECCIÓN APLICADA: Ajuste de márgenes para evitar superposición */
 .section-header {
     text-align: center;
-    margin-bottom: 3.5rem;
+    margin-bottom: 1.5rem; 
 }
 
 .section-tag {
@@ -512,6 +525,7 @@ a {
     font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 700;
     letter-spacing: -0.02em;
+    margin-bottom: 0.5rem; 
 }
 
 .section-subtitle {
@@ -519,17 +533,77 @@ a {
     font-size: 1.05rem;
     color: var(--text-secondary);
     max-width: 500px;
-    margin: -2rem auto 3rem;
+    margin: 0 auto 3rem; /* CORRECCIÓN: Se eliminó el margen negativo (-2rem) */
 }
 
 /* ══════════════════════════════════════
-    ABOUT SECTION
+   ABOUT SECTION
    ══════════════════════════════════════ */
 .about-grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     gap: 3rem;
     align-items: start;
+}
+
+.about-image-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.about-img-container {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-accent);
+    background: var(--bg-card);
+    box-shadow: var(--shadow-md), var(--shadow-glow);
+    transition: var(--transition);
+}
+
+.about-img-container:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg), 0 0 50px rgba(124, 58, 237, 0.25);
+}
+
+.about-photo {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(15%) contrast(105%);
+    transition: var(--transition-slow);
+}
+
+.about-img-container:hover .about-photo {
+    filter: grayscale(0%) contrast(100%);
+    transform: scale(1.03);
+}
+
+.about-img-badge {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-accent);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent-light);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.about-img-badge i,
+.about-img-badge svg {
+    width: 14px;
+    height: 14px;
 }
 
 .about-text p {
@@ -569,70 +643,8 @@ a {
     color: var(--accent-light);
 }
 
-.about-card {
-    position: relative;
-}
-
-.about-card-inner {
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    padding: 2.5rem;
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    transition: var(--transition);
-}
-
-.about-card-inner:hover {
-    border-color: var(--border-accent);
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-glow);
-}
-
-.about-card-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: var(--radius-md);
-    background: rgba(124, 58, 237, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-}
-
-.about-card-icon i,
-.about-card-icon svg {
-    width: 24px;
-    height: 24px;
-    color: var(--accent-light);
-}
-
-.about-card-inner h3 {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-.about-card-inner p {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.7;
-}
-
-.about-card-decoration {
-    position: absolute;
-    bottom: -50px;
-    right: -50px;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-    pointer-events: none;
-}
-
 /* ══════════════════════════════════════
-    SKILLS SECTION
+   SKILLS SECTION (Fallback layout)
    ══════════════════════════════════════ */
 .skills-grid {
     display: grid;
@@ -687,7 +699,9 @@ a {
     transition: var(--transition);
 }
 
+.skill-icon i,
 .skill-icon svg {
+    font-size: 32px; /* Ajuste para las clases de Devicon */
     width: 28px;
     height: 28px;
 }
@@ -719,7 +733,7 @@ a {
 }
 
 /* ══════════════════════════════════════
-    PROJECTS SECTION
+   PROJECTS SECTION
    ══════════════════════════════════════ */
 .projects-grid {
     display: grid;
@@ -776,33 +790,6 @@ a {
     opacity: 1;
 }
 
-.project-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(124, 58, 237, 0.05) 100%);
-}
-
-.placeholder-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-    color: var(--text-muted);
-}
-
-.placeholder-content i,
-.placeholder-content svg {
-    width: 40px;
-    height: 40px;
-    opacity: 0.5;
-}
-
-.placeholder-content span {
-    font-size: 0.85rem;
-    font-weight: 500;
-}
-
 .project-info {
     padding: 1.5rem;
 }
@@ -837,7 +824,7 @@ a {
 }
 
 /* ══════════════════════════════════════
-    TIMELINE SECTION
+   TIMELINE SECTION
    ══════════════════════════════════════ */
 .timeline {
     max-width: 700px;
@@ -920,7 +907,7 @@ a {
 }
 
 /* ══════════════════════════════════════
-    CERTIFICATES SECTION
+   CERTIFICATES SECTION
    ══════════════════════════════════════ */
 .certs-grid {
     display: grid;
@@ -1136,6 +1123,7 @@ a {
     align-items: center;
     justify-content: center;
     transition: var(--transition);
+    font-size: 20px;
 }
 
 .social-link svg {
@@ -1151,7 +1139,8 @@ a {
     transform: translateY(-3px);
 }
 
-.social-link:hover svg {
+.social-link:hover svg,
+.social-link:hover i {
     color: var(--accent-light);
 }
 
@@ -1181,29 +1170,6 @@ a {
     font-size: 0.9rem;
     margin-top: 0.8rem;
     max-width: 280px;
-}
-
-.footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-}
-
-.footer-links h4 {
-    font-size: 0.88rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.footer-links a {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    transition: var(--transition);
-}
-
-.footer-links a:hover {
-    color: var(--accent-light);
-    transform: translateX(3px);
 }
 
 .footer-bottom {
@@ -1346,52 +1312,4 @@ a {
     .about-highlights {
         flex-direction: column;
     }
-}
-
-/* ══════════════════════════════════════
-   ENTRY ANIMATION (Page Load)
-   ══════════════════════════════════════ */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-#navbar {
-    animation: fadeInDown 0.8s ease-out;
-}
-
-.hero-content {
-    animation: fadeInUp 1s ease-out 0.2s both;
-}
-
-/* Smooth reveal for all sections */
-.section {
-    opacity: 0;
-    animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.section:nth-child(1) { animation-delay: 0s; }
-.section:nth-child(2) { animation-delay: 0s; }
-
-/* AOS handles section reveal — disable CSS animation fallback */
-.section {
-    opacity: 1;
-    animation: none;
 }

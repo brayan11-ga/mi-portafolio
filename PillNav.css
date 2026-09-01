@@ -1,0 +1,218 @@
+/* ═════════════════════════════════════════════════
+   PILL NAV STYLES — FLOTANTE Y RESPONSIVE
+   ═════════════════════════════════════════════════ */
+
+.pill-nav-container {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: max-content;
+    pointer-events: none;
+}
+
+/* En dispositivos móviles y tablets pequeñas se fija en la parte inferior */
+@media (max-width: 900px) {
+    .pill-nav-container {
+        top: auto;
+        bottom: 1rem;
+        left: 0;
+        right: 0;
+        transform: none;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 0 1rem;
+    }
+}
+
+.pill-nav {
+    --nav-h: 46px;
+    --logo: 38px;
+    --pill-pad-x: 20px;
+    --pill-gap: 8px;
+    
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-accent);
+    border-radius: 9999px;
+    padding: 5px;
+    box-shadow: var(--shadow-md), var(--shadow-glow);
+    pointer-events: auto;
+}
+
+@media (max-width: 900px) {
+    .pill-nav {
+        width: 100%;
+        max-width: 400px;
+        justify-content: space-around;
+        padding: 6px 12px;
+        background: rgba(18, 18, 26, 0.92);
+        border: 1px solid var(--border-accent);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), var(--shadow-glow);
+        border-radius: 9999px;
+    }
+}
+
+.pill-nav-items {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: var(--nav-h);
+    background: transparent;
+    border-radius: 9999px;
+}
+
+.pill-logo {
+    width: var(--nav-h);
+    height: var(--nav-h);
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    box-shadow: 0 2px 10px var(--accent-glow);
+    margin: 5px;
+}
+
+.pill-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.pill-list {
+    list-style: none;
+    display: flex;
+    align-items: stretch;
+    gap: var(--pill-gap);
+    margin: 2px;
+    padding: 0;
+    height: 100%;
+}
+
+.pill-list > li {
+    display: flex;
+    height: 100%;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 var(--pill-pad-x);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 9999px;
+    box-sizing: border-box;
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease;
+}
+
+.pill:hover {
+    color: var(--text-primary);
+}
+
+.pill .hover-circle {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    z-index: 1;
+    display: block;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.pill .label-stack {
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+    z-index: 2;
+}
+
+.pill .pill-label {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    line-height: 1;
+    will-change: transform;
+}
+
+.pill .pill-label-hover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #ffffff;
+    z-index: 3;
+    display: inline-block;
+    will-change: transform, opacity;
+}
+
+/* ── Control Estricto de Visibilidad Responsiva unificado a 900px ── */
+.desktop-only {
+    display: flex !important;
+}
+
+.mobile-only {
+    display: none !important;
+}
+
+@media (max-width: 900px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: flex !important;
+    }
+}
+
+/* Estilos para los botones/íconos de la barra inferior móvil */
+.mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+    background: transparent;
+}
+
+.mobile-nav-item i,
+.mobile-nav-item svg {
+    width: 20px;
+    height: 20px;
+}
+
+.mobile-nav-item:hover,
+.mobile-nav-item.active {
+    color: white;
+    background: rgba(124, 58, 237, 0.3);
+    box-shadow: 0 0 15px var(--accent-glow);
+}

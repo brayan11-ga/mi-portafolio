@@ -1,0 +1,101 @@
+/* ═════════════════════════════════════════════════
+   TILTED CARD 3D EFFECT — STYLES
+   ═════════════════════════════════════════════════ */
+
+.tilted-card-figure {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    height: 420px;
+    perspective: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.tilted-card-mobile-alert {
+    position: absolute;
+    top: 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: none;
+    z-index: 4;
+}
+
+@media (max-width: 768px) {
+    .tilted-card-mobile-alert {
+        display: block;
+    }
+    .tilted-card-caption {
+        display: none !important;
+    }
+}
+
+.tilted-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg) rotateY(0deg) scale(1);
+    transition: box-shadow var(--transition);
+    border: 1px solid var(--border-accent);
+    background: var(--bg-card);
+    box-shadow: var(--shadow-md), var(--shadow-glow);
+    will-change: transform;
+}
+
+.tilted-card-figure:hover .tilted-card-inner {
+    box-shadow: var(--shadow-lg), 0 0 50px rgba(124, 58, 237, 0.3);
+}
+
+.tilted-card-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    filter: grayscale(15%) contrast(105%);
+    transition: filter var(--transition-slow);
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+.tilted-card-figure:hover .tilted-card-img {
+    filter: grayscale(0%) contrast(100%);
+}
+
+.tilted-card-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    will-change: transform;
+    transform: translateZ(30px);
+}
+
+.tilted-card-caption {
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: var(--radius-sm);
+    background: rgba(10, 10, 15, 0.9);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-accent);
+    padding: 6px 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent-light);
+    opacity: 0;
+    z-index: 3;
+    white-space: nowrap;
+    box-shadow: var(--shadow-sm);
+    will-change: transform, opacity;
+}
