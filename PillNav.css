@@ -1,5 +1,5 @@
 /* ═════════════════════════════════════════════════
-   PILL NAV STYLES — FLOTANTE Y RESPONSIVE
+   PILL NAV STYLES — FLOTANTE Y RESPONSIVE (Fluid Breakpoints)
    ═════════════════════════════════════════════════ */
 
 .pill-nav-container {
@@ -12,23 +12,23 @@
     pointer-events: none;
 }
 
-/* En dispositivos móviles y tablets pequeñas se fija en la parte inferior */
+/* En dispositivos móviles y tablets, la barra flota abajo abarcando el ancho seguro */
 @media (max-width: 900px) {
     .pill-nav-container {
         top: auto;
-        bottom: 1rem;
-        left: 0;
-        right: 0;
+        bottom: 1.2rem;
+        left: 1rem;
+        right: 1rem;
         transform: none;
-        width: 100%;
+        width: auto;
         display: flex;
         justify-content: center;
-        padding: 0 1rem;
+        pointer-events: none;
     }
 }
 
 .pill-nav {
-    --nav-h: 46px;
+    --nav-h: 48px;
     --logo: 38px;
     --pill-pad-x: 20px;
     --pill-gap: 8px;
@@ -46,16 +46,30 @@
     pointer-events: auto;
 }
 
+/* Breakpoint para Celulares y Tablets: Barra inferior fluida de extremo a extremo */
 @media (max-width: 900px) {
     .pill-nav {
         width: 100%;
-        max-width: 400px;
-        justify-content: space-around;
-        padding: 6px 12px;
-        background: rgba(18, 18, 26, 0.92);
+        max-width: 450px; /* Ancho máximo ideal para que no se estire demasiado en pantallas grandes de celular */
+        justify-content: space-evenly; /* Distribuye uniformemente los 5 íconos */
+        padding: 8px 12px;
+        background: rgba(18, 18, 26, 0.95);
         border: 1px solid var(--border-accent);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), var(--shadow-glow);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), var(--shadow-glow);
         border-radius: 9999px;
+    }
+}
+
+/* Breakpoint extra para celulares pequeños (< 480px) */
+@media (max-width: 480px) {
+    .pill-nav-container {
+        left: 0.5rem;
+        right: 0.5rem;
+        bottom: 0.8rem;
+    }
+    .pill-nav {
+        padding: 6px 8px;
+        justify-content: space-between;
     }
 }
 
@@ -195,8 +209,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     color: var(--text-secondary);
     text-decoration: none;
@@ -213,6 +227,6 @@
 .mobile-nav-item:hover,
 .mobile-nav-item.active {
     color: white;
-    background: rgba(124, 58, 237, 0.3);
+    background: rgba(124, 58, 237, 0.35);
     box-shadow: 0 0 15px var(--accent-glow);
 }
